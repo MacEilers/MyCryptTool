@@ -20,6 +20,7 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
     String clear;
     String cypher = "";
     String choice = "";
+    
 
     /**
      * Creates new form MyCryptTool
@@ -35,6 +36,7 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
         jbSatz_Chiffre.addActionListener(this);
         jbSkytale.addActionListener(this);
         jbRückwärts.addActionListener(this);
+        jbInfo.addActionListener(this);
         
     }
 
@@ -61,6 +63,7 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
         jbSatz_Chiffre = new javax.swing.JButton();
         jbSkytale = new javax.swing.JButton();
         jbRückwärts = new javax.swing.JButton();
+        jbInfo =      new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,11 +93,12 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
 
         jbCaesar.setText("Caesar");
 
-        jbSatz_Chiffre.setText("Satz_Chiffre");
+        jbSatz_Chiffre.setText("CM-Bifid");
 
         jbSkytale.setText("Skytale");
 
         jbRückwärts.setText("Switch");
+        jbInfo.setText("Info An/Aus");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +125,7 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jbSatz_Chiffre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jbRückwärts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -129,7 +133,10 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
                         .addComponent(jbEncrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jbDecrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jbDecrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +193,9 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
                         .addGap(18, 18, 18)
                         .addComponent(jbEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfCypher, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -238,6 +247,7 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jbSatz_Chiffre;
     private javax.swing.JButton jbSkytale;
     private javax.swing.JButton jbRückwärts;
+    private javax.swing.JButton jbInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -265,13 +275,12 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
                         int key_position = i%key_s.length();
                         
                         int key = ((int) key_s.charAt(key_position)-48-17);
-                        //System.out.println("Key"+key);
+                        
                         
                         if(encrypt==true) {   
                             char helper = s.charAt(i);
-                            //System.out.println("Char"+helper);
+                            
                             result += (char) (((((int) helper - 65) + key) % 26) + 65);
-                           // System.out.println("Result"+result);
                            
                         }
                         
@@ -342,18 +351,14 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
             Buchstaben.add(""+s.charAt(i));
         }
         
-        System.out.println(Buchstaben);
-        System.out.println(Buchstaben.size());
-    
+        
         while (Buchstaben.size() >0){
             result = result + Buchstaben.get(0);
             Buchstaben.remove(0);
-             System.out.println(result);
-            if (Buchstaben.size() >0){
+             if (Buchstaben.size() >0){
                 result = result + Buchstaben.get(Buchstaben.size()-1);
                 Buchstaben.remove(Buchstaben.size()-1);
-                 System.out.println(result);
-            }
+                 }
             
         
         }
@@ -386,14 +391,12 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
     
     
     }
-    
-    
     private char[][] CM_Bifid_Chiffre_String_to_Matrix( String key1){
    
     String helper_key ="";
     String helper_key_ohne_j ="";
     
-    
+        
     for (int i = 0; i < key1.length(); i++) {// entfehrnt doppelte buchstaben im key
         
             boolean existiert = false;
@@ -406,13 +409,14 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
             helper_key = helper_key+key1.charAt(i);
         }   
     }
+        
     
     
     
     for (int i = 65; i < 91; i++) {//fügt alle buchstaben hinzu die noch nicht existieren 
             boolean existiert = false;
             for (int j = 0; j < helper_key.length(); j++) {// geht über den key drüber und schaut ob der char schoon existiert 
-                if ((helper_key.charAt(i) == (char)i )){
+                if ((helper_key.charAt(j) == (char)i )){
                     existiert =true;
                 }  
             }
@@ -429,17 +433,32 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
             
             }
         }
+        
     
     char[][] Tafel_1 = new char [5][5];// Wird in Tafel gepackt 
     
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 Tafel_1[i][j] = helper_key_ohne_j.charAt((i*5)+j);
-            }
+                }
+            
         }
      return Tafel_1;
+     
+       
     }
     private String CM_Bifid_Chiffre(String s,String key1,String key2) {
+        String s1="";
+        for (int i = 0; i < s.length(); i++) {// Entfernt j (i und j sind in i zusammengelegt )
+            if (s.charAt(i)!= 'J') {
+                
+           s1 = s1+s.charAt(i);
+            
+            }
+            else{s1 = s1+'I';}
+        }
+        s=s1;
+        
          String result="";
          String I ="";
          String J ="";
@@ -455,61 +474,204 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
          Matrix_2 = CM_Bifid_Chiffre_String_to_Matrix(key2);
          
         
+        for (int k = 0; k < s.length(); k++) {
+            
+        char help = s.charAt(k);
+            
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+               
+                if ((int)(Matrix_1[i][j])==(int)help) {
+                    
+                    char help_i =(char)(i+48);
+                    char help_j =(char)(j+48);
+                    I=I+(help_i);
+                    J=J+(help_j);
+                    
          
-         for (int k = 0; k < s.length(); k++) {
-             char helper =s.charAt(k);
-             
-             for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
-                    if (helper == Matrix_1[i][j]){
-                        I = I + i;
-                        J = J + j;
-                    }
-                    break;
+                    
                 }
-                break;
-            }  
-         }
+            }
+            
+        }
+         
+        
+        }
+         
          Zwischen_Matrix_num = I + J;
-         // aufteilen und durch M2 zurückwandeln
-                 
          
          
-                 
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         for (int i = 0; i < Zwischen_Matrix_num.length();i= i+2) {
+             result = result+Matrix_2[Zwischen_Matrix_num.charAt(i)-48][(Zwischen_Matrix_num.charAt(i+1)-48)];
+             
+                    
+        }
+         
+         return result;
+    }
+    private String CM_Bifid_Chiffre_DE(String s,String key1,String key2) {
+        String s1="";
+        for (int i = 0; i < s.length(); i++) {// Entfernt j (i und j sind in i zusammengelegt )
+            if (s.charAt(i)!= 'J') {
+                
+           s1 = s1+s.charAt(i);
+            
+            }
+            else{s1 = s1+'I';}
+        }
+        s=s1;
+        
+         String result="";
+         String I ="";
+         String J ="";
+         String Zwischen_Matrix_num="";
+         
+         
+         char[][] Matrix_2 = new char [5][5];
+         char[][] Matrix_1 = new char [5][5];
+         
+         
+         
+         Matrix_1 = CM_Bifid_Chiffre_String_to_Matrix(key1);
+         Matrix_2 = CM_Bifid_Chiffre_String_to_Matrix(key2);
+         
+        
+        for (int k = 0; k < s.length(); k++) {
+            
+        char help = s.charAt(k);
+            
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+               
+                if ((int)(Matrix_2[i][j])==(int)help) {
+                    
+                    char help_i =(char)(i+48);
+                    char help_j =(char)(j+48);
+                    I=I+(help_i)+(help_j);
+                    
+                    
+         
+                    
+                }
+            }
+            
+        }
+         
+        
+        }
+         
+         Zwischen_Matrix_num = I + J;
+         String Erste_hälfte="";
+         String Zweite_hälfte="";
+         
+         
+         for (int i = 0; i < I.length()/2; i++) {
+            Erste_hälfte=Erste_hälfte+I.charAt(i);
+            
+         }
+         for (int i = I.length()/2; i < I.length(); i++) {
+            Zweite_hälfte=Zweite_hälfte+I.charAt(i);
+        }
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         for (int i = 0; i < Zweite_hälfte.length();i++) {
+             result = result+Matrix_1[Erste_hälfte.charAt(i)-48][(Zweite_hälfte.charAt(i)-48)];
+            
+                    
+        }
          
          return result;
     }
     
-    private String CM_Bifid_Chiffre_DE(String s,String key1,String key2) {
-         String result="";
-         
-                 
-         
-         return result;
-    }
+    int GlobaleVariable = 2;
     
     
     @Override
+   
     public void actionPerformed(ActionEvent e) {
+         
+        if (e.getSource() == jbInfo) {
+           GlobaleVariable = GlobaleVariable+1 ;
+           
+            
+            }
         if (e.getSource() == jbCaesar) {
             choice = "Caesar";
             tfChoice.setText(choice);
+            
+           
+            if (GlobaleVariable%2==0){
+            JOptionPane.showMessageDialog(null,"<html> Bei der Caesar Verschlüsselung handelt es sich um eine <br>"
+                    + "Substitutionschiffre, da jedes Zeichen des Klartextes durch ein anderes ersetzt wird.<br>"
+                    + " Es ist zudem monoalphabetisch, da die Buchstaben immer einheitlich verschoben werden <br>"
+                    + "und somit jeder Klartextzeichen auf das gleiche Geheimtextzeichen abgebildet wird.<br><html> ","Caesar Info",JOptionPane.PLAIN_MESSAGE);
         }
-        if (e.getSource() == jbVigenere) {
+        }
+            if (e.getSource() == jbVigenere) {
             choice = "Vigenere";
             tfChoice.setText(choice);
+            if (GlobaleVariable%2==0){
+            JOptionPane.showMessageDialog(null, "<html>Bei der Vigenere Verschlüsselung handelt es sich um eine "
+                    + "Substitutionschiffre, <br>da jedes Zeichen des Klartextes durch ein anderes ersetzt wird."
+                    + " Zudem ist es polyalphabetisch, <br>da nicht jedes Klartextzeichen auf das gleiche Geheimtextzeichen"
+                    + " abgebildet wird.<html>","Vigenere Info", JOptionPane.PLAIN_MESSAGE);}
         }
         if (e.getSource() == jbSatz_Chiffre) {
             choice = "Satz_Chiffre";
             tfChoice.setText(choice);
+            if (GlobaleVariable%2==0){
+            JOptionPane.showMessageDialog(null, "<html>Die CM-Bifid Verschlüsselung beinhaltet eine Transpositionschiffre "
+                    + "und eine polyalphabetische  Substitutionschiffre. <br> Es werden die Buchstaben im ersten Schritt "
+                    + "in Koordinaten kodiert und hinter einander geschrieben.  <br>   Im zweiten Schritt wird diese Ziffernreihe"
+                    + " aufgespalten in 2 Reihen, <br> die Ziffern an ungerader Position (also die 1., 3., 5 usw.)"
+                    + " werden in die erste neue Reihe aufgenommen, <br> die an gerader Position (2., 4., 6. usw.) in die Zweite."
+                    + " Dann werden die Reihen wieder zusammen gefügt.<br>Nun werden von vorne die Ziffern wieder als Koordinaten entnommen und über eine"
+                    + " zweite Matrix zurück in Buchstaben umgewandelt.  <html>", "CM-Bifid Info", JOptionPane.PLAIN_MESSAGE);
+        
+        
+        
+        
+            }
+        
+        
         }
         if (e.getSource() == jbSkytale) {
             choice = "Skytale";
             tfChoice.setText(choice);
+            if (GlobaleVariable%2==0){
+            JOptionPane.showMessageDialog(null, "<html>Bei Skytale handelt es sich um die eine Transpositionschiffre,<br>"
+                    + " da die Zeichen gleich bleiben und durch eingefügte Zeichen, sich nur der Index dieser im"
+                    + " Geheimtext ändert.<html>", "Skytale Info", JOptionPane.PLAIN_MESSAGE);
+        }
         }
         if (e.getSource() == jbRückwärts) {
             choice = "Switch";
             tfChoice.setText(choice);
+            if (GlobaleVariable%2==0){
+            JOptionPane.showMessageDialog(null, "<html>Bei der Switch Verschlüsselung wird die Reihenfolge der Buchstaben geändert, "
+                    + "wobei die Zeichen gleich bleiben.<br>" 
+                    +"Somit handelt es sich um eine Transpositionschiffre." 
+                    +"(Dieses Verfahren basiert auf dem Schema: <br>Erster Buchstabe, letzter Buchstabe, 2. Buchstabe, vorletzter"
+                    + " Buchstabe usw.)<html>", "Switch Info", JOptionPane.PLAIN_MESSAGE);
+            }
         }
         
 
@@ -529,9 +691,11 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
                 
                 else if (choice.equals("Satz_Chiffre")){
                     
-                    String key_1;
+                   String key_1;
+                   
                     key_1 = (JOptionPane.showInputDialog(this, null, "Code Wort 1", JOptionPane.NO_OPTION));
                     String key_2;
+                   
                     key_2 = (JOptionPane.showInputDialog(this, null, "Code Wort 2", JOptionPane.NO_OPTION));
                     
                     tfCypher.setText(CM_Bifid_Chiffre(  clear.toUpperCase(), key_1.toUpperCase(),key_2.toUpperCase()));
@@ -580,17 +744,14 @@ public class MyCryptTool extends javax.swing.JFrame implements ActionListener {
                 
                 
                 else if (choice.equals("Satz_Chiffre")){
-                    String key_1;
+                    String key_1="";
                     key_1 = (JOptionPane.showInputDialog(this, null, "Code Wort 1", JOptionPane.NO_OPTION));
-                    String key_2;
+                    String key_2="";
                     key_2 = (JOptionPane.showInputDialog(this, null, "Code Wort 2", JOptionPane.NO_OPTION));
+                  
                     
-                    tfClear.setText(CM_Bifid_Chiffre_DE( cypher,key_1,key_2 ));
-                    
-                   
-                    
-                    
-                    
+                    tfClear.setText(CM_Bifid_Chiffre_DE( cypher,key_1.toUpperCase(),key_2.toUpperCase() ));
+                       
                     
                 }
                 else if (choice.equals("Switch")){
